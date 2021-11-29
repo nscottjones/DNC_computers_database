@@ -1,0 +1,61 @@
+1)	CPU_QUERY
+
+SELECT ItemID, ItemName, Price FROM INVENTORY
+WHERE ItemClass = 'CPU';
+
+The CPU query can be used by employees to check which CPUs the store has in stock. This is useful when there is a higher demand for a certain CPU and employees need to track sales.
+
+2)	Intel_i3_orders_Query
+	
+	SELECT ordernumber, CPU
+FROM order_details
+WHERE CPU = 'Intel i3';
+
+This query is used by employees to check which orders had an Intel i3 CPU. This can also be altered to check orders for any other CPUs. The use of this query is useful to quickly check if a customer has received the correct CPU with their order.	
+
+3)	Orders_per_customer
+	
+Select customers.customerid , count(orders.customerid) AS NumOfOrders from customers
+inner join orders on customers.customerid = orders.customerid
+group by customers.customerid;
+
+This query is used to check how many orders each customer has placed. The Orders per customer query can be utilized to assess the loyalty and quantity of orders placed by a customer. As an example, the management team can decide on different forms of promotion based on if the majority of orders are from recurring customers or one-off purchases. 
+
+4) 	Basic_orders
+
+	SELECT Count(ordernumber) AS BasicOrders FROM Order_details
+WHERE GPU = 'None' AND extrastorage = 'None';
+
+This query is used to check how many orders did not have a gpu and extra storage making it a basic order. Similarly to the Orders_per_customer query, management may utilize this to form their promotions strategy.
+
+5)	1000_plus_query
+	
+	SELECT customers.firstname, customers.lastname, orders.amount, orders.ordernumber
+FROM customers INNER JOIN orders ON customers.customerid = orders.customerid
+WHERE orders.amount > 1000;
+
+The 1000_plus_query is used by employees to check which customers have orders worth more than $1,000.00. This provides information on specific customer orders and used in conjunction with the Orders_per_customer query the biggest spenders can be identified easily.
+
+6) 	4K_display_query
+
+SELECT customers.firstname, customers.lastname, customers.email, order_details.display
+FROM (customers INNER JOIN orders ON customers.customerid=orders.customerid) INNER JOIN order_details ON orders.ordernumber=order_details.ordernumber
+WHERE order_details.display = '4K Display';
+
+The 4k display query is used to get the name and email of all customers that purchased a 4k display. This query is useful if the display has a recall and the business needs to reach out to the customers for example. 
+
+7) 	Bill_gates_query
+
+SELECT customers.customerid, customers.firstname, customers.lastname, orders.ordernumber, orders.amount
+FROM customers INNER JOIN orders ON customers.customerid=orders.customerid
+WHERE customers.customerid=1;
+
+This query can be used to pull a full list of orders from a specific customer and their corresponding totals for each order. For example, Bill Gates just sold some stock and needs to pay for his orders. He has lost his receipts and has asked for the order number and amount due for each computer.
+
+8)	jmail_query
+
+	SELECT firstname, lastname, email
+FROM customers
+WHERE email LIKE "*jmail*";	
+	
+The jmail query can be used to get the info of all customers that use jmail. This query can be adjusted for other email domains as well. This can be utilized to categorize 
